@@ -1,9 +1,10 @@
 const readlineSync = require("readline-sync");
 const { Common } = require("./utils/common");
 const common = new Common();
+const chalk = require('chalk');
 
 if (readlineSync.keyInYN("Do you want to play Texas Holdem?")) {
-  console.log("Staring now...");
+  console.log(chalk.green("Staring now..."));
   readlineSync.question("Get 5 community cards?");
   const communityCards = common.fillDeck(5);
   console.log(common.displayCards(communityCards) + "\n");

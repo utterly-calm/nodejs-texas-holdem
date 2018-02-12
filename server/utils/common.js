@@ -1,5 +1,6 @@
 var shuffle = require("shuffle-array");
 var PokerEvaluator = require("poker-evaluator");
+const chalk = require('chalk');
 
 class Common {
   output(players) {
@@ -105,13 +106,13 @@ class Common {
     const icon = cardType.slice(1, 2);
     switch (cardType.slice(1, 2)) {
       case "s":
-        return `${number}♠`;
+        return `${number}${chalk.green('♠')}`;
       case "h":
-        return `${number}♥`;
+        return `${number}${chalk.red('♥')}`;
       case "d":
-        return `${number}♦`;
+        return `${number}${chalk.yellow('♦')}`;
       case "c":
-        return `${number}♣`;
+        return `${number}${chalk.blue('♣')}`;
     }
   }
 }
