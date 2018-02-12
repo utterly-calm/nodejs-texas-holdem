@@ -1,6 +1,36 @@
 var shuffle = require("shuffle-array");
+var PokerEvaluator = require("poker-evaluator");
 
 class Common {
+  output(players) {
+    players.forEach((player, i) => {
+      console.log(
+        `${i + 1}. ${player.name} (${this.displayCards(player.cards)}) ${
+          player.handName
+        }`
+      );
+    });
+  }
+
+  evaluateHands({ communityCards, players }) {
+    let ranking = [];
+    players.forEach(player => {
+      const mArray = communityCards.concat(player.cards);
+      const res = PokerEvaluator.evalHand(mArray);
+      ranking.push({
+        name: player.name,
+        cards: player.cards,
+        rank: res.handRank,
+        handName: res.handName
+      });
+    });
+    ranking.sort((a, b) => {
+      return a.rank < b.rank ? -1 : 1;
+    });
+
+    return ranking;
+  }
+
   fillDeck(size) {
     const deck = [];
     deck.push("As");
@@ -63,7 +93,6 @@ class Common {
   }
 
   displayCards(cards) {
-    
     return cards
       .map(card => {
         return this.getIcon(card);
@@ -72,9 +101,9 @@ class Common {
   }
 
   getIcon(cardType) {
-    const number = cardType.slice(0,1);
-    const icon = cardType.slice(1,2);
-    switch (cardType.slice(1,2)) {
+    const number = cardType.slice(0, 1);
+    const icon = cardType.slice(1, 2);
+    switch (cardType.slice(1, 2)) {
       case "s":
         return `${number}♠`;
       case "h":

@@ -1,36 +1,6 @@
-var PokerEvaluator = require("poker-evaluator");
 const readlineSync = require("readline-sync");
 const { Common } = require("./utils/common");
 const common = new Common();
-
-const output = players => {
-  players.forEach((player, i) => {
-    console.log(
-      `${i + 1}. ${player.name} (${common.displayCards(player.cards)}) ${
-        player.handName
-      }`
-    );
-  });
-};
-
-const evaluateHands = ({ communityCards, players }) => {
-  let ranking = [];
-  players.forEach(player => {
-    const mArray = communityCards.concat(player.cards);
-    const res = PokerEvaluator.evalHand(mArray);
-    ranking.push({
-      name: player.name,
-      cards: player.cards,
-      rank: res.handRank,
-      handName: res.handName
-    });
-  });
-  ranking.sort((a, b) => {
-    return a.rank < b.rank ? -1 : 1;
-  });
-
-  return ranking;
-};
 
 if (readlineSync.keyInYN("Do you want to play Texas Holdem?")) {
   console.log("Staring now...");
@@ -55,8 +25,8 @@ if (readlineSync.keyInYN("Do you want to play Texas Holdem?")) {
       communityCards,
       players
     };
-    const result = evaluateHands(input);
-    output(result);
+    const result = common.evaluateHands(input);
+    common.output(result);
   }
 } else {
   console.log("Good bye...");
