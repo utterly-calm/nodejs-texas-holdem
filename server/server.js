@@ -1,6 +1,5 @@
 const readlineSync = require("readline-sync");
-const { Common } = require("./utils/common");
-const common = new Common();
+const { displayCards, evaluateHands, output } = require("./utils/common");
 const chalk = require("chalk");
 
 if (readlineSync.keyInYN("Do you want to play Texas Holdem?")) {
@@ -12,7 +11,7 @@ if (readlineSync.keyInYN("Do you want to play Texas Holdem?")) {
         return $1 + $2.toLowerCase();
       })
       .split(" ");
-    console.log(common.displayCards(communityCards) + "\n");
+    console.log(displayCards(communityCards) + "\n");
     const playersCount = readlineSync.question("Enter number of players? ");
     console.log("\n");
     if (playersCount) {
@@ -39,15 +38,15 @@ if (readlineSync.keyInYN("Do you want to play Texas Holdem?")) {
           name: playerName,
           cards: playerHand
         });
-        console.log(`${playerName} ${common.displayCards(playerHand)}\n`);
+        console.log(`${playerName} ${displayCards(playerHand)}\n`);
       }
       const input = {
         communityCards,
         players
       };
 
-      const result = common.evaluateHands(input);
-      common.output(result);
+      const result = evaluateHands(input);
+      output(result);
     }
   } catch (e) {
     console.log(chalk.red(`Error: ${e.message}`));

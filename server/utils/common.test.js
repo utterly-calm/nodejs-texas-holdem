@@ -1,23 +1,22 @@
 const expect = require("expect");
-const { Common } = require("./common");
-const common = new Common();
-const chalk = require('chalk');
+const { displayCards, evaluateHands, output, getIcon } = require("./common");
+const chalk = require("chalk");
 
 describe("displayCards", () => {
   it("should display cards as per input", () => {
     const cards = ["4s", "5h"];
-    const displayCards = common.displayCards(cards);
-    expect(displayCards).toBeA("string");
-    expect(displayCards).toBe(`4${chalk.green('♠')} 5${chalk.red('♥')}`);
+    const dc = displayCards(cards);
+    expect(dc).toBeA("string");
+    expect(dc).toBe(`4${chalk.green("♠")} 5${chalk.red("♥")}`);
   });
 });
 
 describe("getIcon", () => {
   it("should display icon as per input", () => {
     const card = "4s";
-    const icon = common.getIcon(card);
+    const icon = getIcon(card);
     expect(icon).toBeA("string");
-    expect(icon).toBe(`4${chalk.green('♠')}`);
+    expect(icon).toBe(`4${chalk.green("♠")}`);
   });
 });
 
@@ -35,7 +34,7 @@ describe("evaluateHands", () => {
       }
     ];
 
-    const result = common.evaluateHands({ communityCards, players });
+    const result = evaluateHands({ communityCards, players });
     expect(result).toMatch(players);
     expect(result[0]).toIncludeKeys(["rank", "handName"]);
   });
