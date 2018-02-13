@@ -3,14 +3,6 @@ const { Common } = require("./common");
 const common = new Common();
 const chalk = require('chalk');
 
-describe("fillDeck", () => {
-  it("should generate cards and return number of cards as per input size", () => {
-    const size = 5;
-    const cards = common.fillDeck(size);
-    expect(cards.length).toBe(size);
-  });
-});
-
 describe("displayCards", () => {
   it("should display cards as per input", () => {
     const cards = ["4s", "5h"];
