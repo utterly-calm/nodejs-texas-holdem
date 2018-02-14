@@ -19,6 +19,12 @@ const playingCards = {
   2: 'Two',
   A: 'Ace',
 };
+const mapping = {
+  s: chalk.green('♠'),
+  h: chalk.red('♥'),
+  d: chalk.yellow('♦'),
+  c: chalk.blue('♣'),
+};
 
 const output = (players) => {
   players.forEach((player, i) => {
@@ -56,8 +62,10 @@ const getIcon = (cardType) => {
   return '';
 };
 
+const getIconV1 = cardType => cardType.replace(/[shdc]$/g, v => mapping[v]);
+
 const displayCards = cards => cards
-  .map(card => getIcon(card))
+  .map(card => getIconV1(card))
   .join(' ');
 
 const ucfirst = str => str.replace(
