@@ -85,8 +85,7 @@ const generateHandName = (handName, handType, communityCards, playerCards) => {
 };
 
 const evaluateHands = ({ communityCards, players }) => {
-  const ranking = [];
-  players.map((player) => {
+  return players.map((player) => {
     const mArray = communityCards.concat(player.cards);
     const res = PokerEvaluator.evalHand(mArray);
     return {
@@ -101,8 +100,6 @@ const evaluateHands = ({ communityCards, players }) => {
       ),
     };
   }).sort((a, b) => (a.rank < b.rank ? -1 : 1));
-
-  return ranking;
 };
 
 module.exports = {
