@@ -18,5 +18,9 @@
     "poker-evaluator": "^0.3.1",
     "readline-sync": "^1.4.8",
     "shuffle-array": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0"
   }
 }
